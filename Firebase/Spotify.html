@@ -56,11 +56,7 @@
 		$.each(items,  function(k, item){
 			var name = item['name'];
 			var image = item['images'][0].url;
-			//alert(k + ' &' +  v);
-			//var item_name =  k['name'] ;
-			//var url = k['url'] ;
-			//alert(item_name);
-			$('<div/>').text(name).prepend('<img id="cover" src=' + image + '/>' ).appendTo($('#AristArea'));
+			$('<div/>').text(name).prepend($('<img>',{id:'theImg',src:image})).appendTo($('#AristArea'));
 		});
 
 	 	
