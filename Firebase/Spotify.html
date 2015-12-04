@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css"></script>
+
+</head>
+<body>
+<h1>FireBase Practice</h1>
+
+<div id='messagesDiv'></div>
+<input type="text" id='spotifyJsonInput' placeholder='JsonInput'>
+<input type="button" id='spotifyButton' placeholder='button' value='Submit'>
+
+
+
+
+<br/>
+<input type="button" id='GetArtist' placeholder='button' value='GetArtist'>
+<div id='AristArea'></div>
+<script>
+     var myDataRef = new Firebase('https://shinjikao.firebaseio.com/');
+	     $('#GetArtist').click(function(e){
+	     	$.ajax({
+		    url: 'https://api.spotify.com/v1/browse/featured-playlists?locale=zh_TW&country=TW&timestamp=2014-10-23T09%3A00%3A00&limit=10',
+		   // dataType : 'jsonp',
+		    beforeSend : function(xhr) {
+		  	  xhr.setRequestHeader("Accept" , "application/json"),
+		      xhr.setRequestHeader("Authorization", "Bearer " + 'BQCB-36eSAT4YM7GpU7XNq4Uh9Z_yBoT3hFjMXGvhUSaajUFBOpO9K1unBm69kNsxEbZEG9l6rXRHZZ0AmB2Bo-Aqvp1poP1h5ZX_sXE-hnm3tLCHRmHx4EXdnrf0HzwjGIIl8YxSZDGV0cLhMK_qvzFRadxEMUvKauf6upbNeBw9khnFWkor8cQZHaCegCFrOXA7HNIoFzKeh7oCMNwl9FsKoeLOmS1SiLBBgXH3GcmBRzkfbdy2o7ve8jPpwLaqL2QXUOn-VSfZm3KCp6QNO4LhKXqgMQez7YGlisHp_htvhM');
+		    },
+		    error : function() {
+	      		// error handler
+	      		alert("error handler");
+			},
+			success: function(data) {
+			    // success handler
+			    alert("success handler");
+			    
+			    disPlayData(data);
+			 }
+		});	
+     });
+	 function disPlayData(data){
+	 	var message = data['message'];
+	 	
+
+	 	var items = data['playlists'].items;
+		var name1 = data['playlists'].items[0].name;
+		var name2 = data['playlists'].items[1].name;
+		
+		//alert(name1);
+		//alert(name2);
+		//alert(items['url']);
+		$.each(items,  function(k, item){
+			var name = item['name'];
+			var image = item['images'][0].url;
+			//alert(k + ' &' +  v);
+			//var item_name =  k['name'] ;
+			//var url = k['url'] ;
+			//alert(item_name);
+			$('<div/>').text(name).prepend('<img id="cover" src=' + image + '/>' ).appendTo($('#AristArea'));
+		});
+
+	 	
+	 };
+
+	
+
+
+     $('#spotifyButton').click(function(e){
+ 		var spotifyJsonInput = $('#spotifyJsonInput').val();
+ 		var obj = $.parseJSON(spotifyJsonInput);
+		alert(obj['name']);
+		$.each(obj, function(key, value) { alert(key + "=" + value); });
+ 		myDataRef.push({artist: spotifyJsonInput});
+ 		$('#spotifyJsonInput').val('');
+		//var name = 'AAA';
+		//var text = 'BBB';
+		//alert('name'+ name +'text'+ text);
+		//myDataRef.push({name: name, text: text});
+ 		
+     });
+	
+    </script>
+</body>
+</html>
