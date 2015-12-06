@@ -1,0 +1,55 @@
+
+
+body{
+
+}
+
+
+span.glyphicon-play-circle {
+font-size: 2.2em;
+}
+.narbar-fixed-top {
+background-color: #CC5D5D;
+border-color: transparent;
+}
+
+.artist-play-button {
+margin-right:8px;
+}
+#button-panel {
+margin-top:4px;
+}
+#rp-now-playing {
+margin-top:20px;
+height:300px;
+}
+#rp-song-title {
+overflow:hidden;
+font-weight:bold;
+height:18px;
+width:400px;
+}
+#rp-artist-name {
+overflow:hidden;
+height:18px;
+width:400px;
+}
+#rp-album-art {
+height:250px;
+}
+#play-all {
+margin-top:10px;
+margin-left:0px;
+}
+#info {
+margin-top:10px;
+}
+#results {
+cursor:hand;
+cursor:pointer;
+}
+
+.narbar-fixed-top {
+background-color: #CC5D5D;
+border-color: transparent;
+}

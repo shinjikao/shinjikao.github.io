@@ -1,47 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<title>Spotify Dark</title>
 	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css"/>
+	<link href="mycss.css" rel="stylesheet">
+	<style>
+		
+
+	</style>
 
 </head>
 <body>
-<h1>FireBase Practice</h1>
+<div class="navbar navbar-default narbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+          <a href="../" class="navbar-brand">Spotify練習</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>    
+        </div>
 
-<div id='messagesDiv'></div>
-<input type="text" id='spotifyJsonInput' placeholder='JsonInput'>
-<input type="button" id='spotifyButton' placeholder='button' value='Submit'>
 
+        <div class="navbar-collapse collapse" id="navbar-main">
+	          <ul class="nav navbar-nav">
+	            <li class="dropdown">
+	              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">下載 <span class="caret"></span></a>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Android版</a></li>                 
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">iOS版</a></li>  
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Windows桌面版</a></li>  	
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Mac桌面版</a></li>  	
+	              </ul>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                       
+	              </ul>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                   
+	              </ul>
+	            </li>
+	            
+	          </ul>
 
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="http://shinjikao.github.io/Firebase/Spotify.html" target="_blank">註冊</a></li>
+	          </ul>
+	 </div>
+	</div>
 
+</div>	
 
-<br/>
-<input type="button" id='GetArtist' placeholder='button' value='GetArtist'>
-<div id='AristArea'></div>
+	<div class="container">
+
+		<input type="text" id="token" class="form-control" placeholder='Spotify Token'>
+
+		<a href="#" id='GetArtist' class="btn btn-default">GetArtist</a>
+		<br/>
+		
+
+		<div id='test' class="row">
+
+		</div>
+		
+		
+	</div>
 <script>
-     var myDataRef = new Firebase('https://shinjikao.firebaseio.com/');
+
+
+		var myDataRef = new Firebase('https://shinjikao.firebaseio.com/');
 	     $('#GetArtist').click(function(e){
+	     	var token = $('#token').val();
+
 	     	$.ajax({
-		    url: 'https://api.spotify.com/v1/browse/featured-playlists?locale=zh_TW&country=TW&timestamp=2014-10-23T09%3A00%3A00&limit=10',
-		   // dataType : 'jsonp',
-		    beforeSend : function(xhr) {
-		  	  xhr.setRequestHeader("Accept" , "application/json"),
-		      xhr.setRequestHeader("Authorization", "Bearer " + 'BQBlvi6oW2aAimZLc_-zNmrpoTS_PK_aaTI8IgOU_FiO5nA71WSeWJYF_iEUvwqP8AIoL3Ee-9PtsWGSDmM2FGxsw-vfqInafjfvCUwSywqKWowj4O_tvuyI2ULoK2MT3tEW9L6MiEDFfddMRBdm9c12Q8MF6p_o0SSVk2L40IL2HcSpzzrl7tnmmEXQFogGe9qyggHjDCNeSYbFdGSp-kLu9hhWNOqbSK6j1ChTMBLr5eNKE_BF3ykGRm1HD-NnqU8Kyq5k1dgLnvLz1PFIrH-HFZdINt5kTd7gnJBr2JM2gDg');
-		    },
-		    error : function() {
-	      		// error handler
-	      		alert("error handler");
-			},
-			success: function(data) {
-			    // success handler
-			    alert("success handler");
-			    
-			    disPlayData(data);
-			 }
-		});	
-     });
+			    url: 'https://api.spotify.com/v1/browse/featured-playlists?locale=zh_TW&country=TW&timestamp=2014-10-23T09%3A00%3A00&limit=10',
+			   // dataType : 'jsonp',
+			    beforeSend : function(xhr) {
+			  	  xhr.setRequestHeader("Accept" , "application/json"),
+			      xhr.setRequestHeader("Authorization", "Bearer " + token);
+			    },
+			    error : function() {
+		      		// error handler
+		      		alert("error handler");
+				},
+				success: function(data) {
+				    // success handler
+				    //alert("success handler");			    
+				    disPlayData(data);
+				 }
+			});	
+     	});
 	 function disPlayData(data){
 	 	var message = data['message'];
 	 	
@@ -49,20 +101,55 @@
 	 	var items = data['playlists'].items;
 		var name1 = data['playlists'].items[0].name;
 		var name2 = data['playlists'].items[1].name;
+
 		
 		//alert(name1);
 		//alert(name2);
 		//alert(items['url']);
 		$.each(items,  function(k, item){
-			var name = item['name'];
+			var name = item['name'];					
 			var image = item['images'][0].url;
-			$('<div/>').text(name).prepend($('<img>',{id:'theImg',src:image})).appendTo($('#AristArea'));
-		});
+			var total = item['tracks'].total;
+			var url = item['uri'];
+			
 
-	 	
+
+			//pass format
+			//https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}
+			var user_id = item['owner'].id;
+			var playlist_id =item['id'];	
+
+
+			var user 	  =$('<h6>').text(user_id);
+			var playlist  =$('<h6>').text(playlist_id);
+			var chain     =$('<div>',{class:'col-sm-6 col-lg-6 col-md-6'}) ;
+			var thumbnail =$('<div>',{class:'thumbnail'});
+
+
+			var image     =$('<a>',{href:"Spotify_album.html?"+"user_id=" +user_id + '&' + 'playlist_id='+playlist_id}).append($('<img>',{src:image})) ;  
+
+			var caption   =$('<div>',{class:'caption'});
+			var h41 	  =$('<h4>',{class:'pull-right'}).text('');
+			var h42 	  =$('<h4>').append($('<a/>',{href:'#'})).text(name);
+			var descrption=$('<p>').text(url);
+			var playbutton=$('<span>',{class:'pull-right glyphicon glyphicon-play-circle'})  ;
+			
+
+			caption.append(playbutton).append(h42).append(descrption).append(user).append(playlist);
+			thumbnail.append(image);
+			thumbnail.append(caption);
+			chain.append(thumbnail);
+			$('#test').append(chain);
+
+
+
+
+
+			//$('<div/>',{class:'col-md-4'}).text(name).prepend($('<img>',{id:'theImg',src:image})).appendTo($('.row'));
+			//$('<div/>',{class:'col-md-4 portfolio-item'}).prepend($('<img>',{id:'theImg',src:image})).prepend('<a href="#">' + name + '</a>').appendTo($('.row'));
+			//$('<div/>',{class:'col-md-4 portfolio-item'})
+		});	 	
 	 };
-
-	
 
 
      $('#spotifyButton').click(function(e){
