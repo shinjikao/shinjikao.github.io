@@ -172,7 +172,7 @@ $(document).ready(function() {
 			var td_index = $('<td>').text(index+1);
 			var album_cover =item['track']['album']['images'][2].url;
 			//alert(album_cover);
-			var td_album_cover= $('<td>').append($('<img>',{src: album_cover })) ;
+			var td_album_cover= $('<td>').append($('<img>',{src: album_cover ,width:40,height:40})) ;
 
 			var td_artist =$('<td>').text(item['track']['artists'][0].name );
 			var td_title =$('<td>').text( item['track'].name );
