@@ -32,10 +32,10 @@ new (function() {
     // Block and block menu descriptions
     var descriptor = {
         blocks: [
-            ['R', 'Robot YoYo %s', 'getRobotYoYo', 'JJJackal'],
+            ['', 'Robot YoYo %s', 'getRobotYoYo', 'JJJackal'],
         ]
     };
 
     // Register the extension
-    ScratchExtensions.register('Weather extension', descriptor, ext);
+    ScratchExtensions.register('ASUS Robot extension', descriptor, ext);
 })();
