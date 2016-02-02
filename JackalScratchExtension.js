@@ -22,7 +22,7 @@ new (function() {
               url: 'http://192.168.43.97:8080/?getYoyo='+ Username, dataType: 'jsonp',
               success: function( responsedata ) {
                   console.log('success');
-                  $("#div1").html('success');
+                  //$("#div1").html('success');
                   // Got the data - parse it and return the temperature
                   console.log(responsedata);
               }
