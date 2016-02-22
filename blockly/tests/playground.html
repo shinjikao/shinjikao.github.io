@@ -11,6 +11,9 @@
 <script src="../generators/javascript/text.js"></script>
 <script src="../generators/javascript/lists.js"></script>
 <script src="../generators/javascript/colour.js"></script>
+
+<script src="../generators/javascript/robotyoyo.js"></script>
+
 <script src="../generators/javascript/variables.js"></script>
 <script src="../generators/javascript/procedures.js"></script>
 <script src="../generators/php.js"></script>
@@ -54,6 +57,20 @@
 // Depending on the URL argument, render as LTR or RTL.
 var rtl = (document.location.search == '?rtl');
 var workspace = null;
+
+function runCode(){
+    window.LoopTrap = 1000;
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = 'if (--window.LoopTrap == 0 ) throw "Infinite loop.";\n';
+
+    var code = Blockly.JavaScript.workspaceToCode(workspace);
+    Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+    try{
+        eval(code);
+    }catch(e){
+        alert(e);
+    }
+
+}
 
 function start() {
   var toolbox = document.getElementById('toolbox');
@@ -248,6 +265,11 @@ h1 {
   <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
+
+    <category name="ASUS" colour="210">
+      <block type="yoyo"></block>
+    </category>
+
     <category name="Logic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -590,6 +612,10 @@ h1 {
     Log events: &nbsp;
     <input type="checkbox" onclick="logEvents(this.checked)" id="logCheck">
   </p>
+
+    <div>
+        <button onclick="runCode()">Run Program</button>
+    </div>
 
 </body>
 </html>

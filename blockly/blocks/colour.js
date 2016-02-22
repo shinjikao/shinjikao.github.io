@@ -111,6 +111,7 @@ Blockly.Blocks['colour_blend'] = {
    * @this Blockly.Block
    */
   init: function() {
+
     this.setHelpUrl(Blockly.Msg.COLOUR_BLEND_HELPURL);
     this.setColour(Blockly.Blocks.colour.HUE);
     this.appendValueInput('COLOUR1')
