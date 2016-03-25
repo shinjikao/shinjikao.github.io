@@ -6,28 +6,29 @@ goog.provide('Blockly.JavaScript.robotyoyo');
 
 goog.require('Blockly.JavaScript');
 
-Blockly.Blocks['yoyo'] = {
-    /**
-     * Block for negation.
-     * @this Blockly.Block
-     */
-    init: function() {
-        this.jsonInit({
-            "message0": 'YoYo',
-            "args0": [
-                {
-                    "type": "input_value",
-                    "name": "BOOL",
-                    "check": "Boolean"
-                }
-            ],
-            "output": "Boolean",
-            "colour": Blockly.Blocks.logic.HUE,
-            "tooltip": Blockly.Msg.LOGIC_NEGATE_TOOLTIP,
-            "helpUrl": Blockly.Msg.LOGIC_NEGATE_HELPURL
-        });
-    }
+
+Blockly.JavaScript['yoyo'] = function(block) {
+    // Search the text for a substring.
+    var operator = block.getFieldValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'FIND',
+            Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'VALUE',
+            Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+    var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+    return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 
+
+
+Blockly.JavaScript['text_length2'] = function(block) {
+    // Search the text for a substring.
+    var operator = block.getFieldValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'FIND',
+            Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'VALUE',
+            Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+    var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+    return [code, Blockly.JavaScript.ORDER_MEMBER];
+};
 

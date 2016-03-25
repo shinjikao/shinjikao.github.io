@@ -29,6 +29,59 @@ goog.provide('Blockly.JavaScript.texts');
 goog.require('Blockly.JavaScript');
 
 
+
+Blockly.JavaScript['launch_youtube']  = function(block){
+
+    $(document).ready(function(){
+        $.ajax({
+            url: 'http://192.168.43.97:8080/?youtube=wqrqrqwrq',
+            // dataType : 'jsonp',
+
+           // error : function() {
+                // error handler
+            //    alert("error handler");
+           // },
+            success: function(data) {
+                // success handler
+                //alert("success handler");
+                alert(data);
+            }
+        });
+    });
+
+    var code = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}
+
+Blockly.JavaScript['text_hello']  = function(block){
+
+
+
+    $(document).ready(function(){
+        $("#msgid").addClass('ASD');
+        $("#msgid").html("This is Hello World by JQuery");
+     });
+
+    console.log('hello');
+    console.log('it is test');
+    console.log(block);
+
+    var code = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
+    return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}
+
+Blockly.JavaScript['text_length2'] = function(block) {
+    // Search the text for a substring.
+    var operator = block.getFieldValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
+    var argument0 = Blockly.JavaScript.valueToCode(block, 'FIND',
+            Blockly.JavaScript.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.JavaScript.valueToCode(block, 'VALUE',
+            Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
+    var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+    return [code, Blockly.JavaScript.ORDER_MEMBER];
+};
+
+
 Blockly.JavaScript['text'] = function(block) {
   // Text value.
   var code = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));

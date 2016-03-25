@@ -34,6 +34,48 @@ goog.require('Blockly.Blocks');
 
 Blockly.Blocks.texts.HUE = 160;
 
+Blockly.Blocks['launch_youtube'] = {
+  init: function() {
+    this.setColour(140);
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField('Launch Youtube');
+    this.setOutput(true, 'Number');
+    this.setTooltip('Launch a youtube video.');
+    this.setHelpUrl('http://www.youtube.com/watch?v=cxLG2wtE7TM');
+  }
+};
+
+
+
+Blockly.Blocks['text_hello'] = {
+  init: function() {
+    this.setColour(140);
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField('Say Hello');
+    this.setOutput(true, 'Number');
+    this.setTooltip('Returns number of letters in the provided text.');
+    this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+  }
+};
+
+
+
+Blockly.Blocks['text_length2'] = {
+  init: function() {
+    this.setColour(160);
+    this.appendValueInput('VALUE')
+        .setCheck('String')
+        .appendField('length 2of');
+    this.setOutput(true, 'Number');
+    this.setTooltip('Returns number of letters in the provided text.');
+    this.setHelpUrl('http://www.w3schools.com/jsref/jsref_length_string.asp');
+  }
+};
+
+
+
 Blockly.Blocks['text'] = {
   /**
    * Block for text value.
