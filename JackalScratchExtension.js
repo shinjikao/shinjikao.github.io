@@ -19,7 +19,7 @@ new (function() {
         // Make an AJAX call to the Open Weather Maps API
         $.ajax({
               //url: 'http://api.openweathermap.org/data/2.5/weather?q='+location+'&units=imperial',
-              url: 'http://192.168.43.97:8080/?getYoyo='+ Username, dataType: 'jsonp',
+              url: 'http://192.168.43.143:8080/?getYoyo='+ Username, dataType: 'json',
               success: function( responsedata ) {
                   console.log('success');
                   //$("#div1").html('success');
