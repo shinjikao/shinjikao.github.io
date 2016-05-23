@@ -6,8 +6,8 @@
     ext._getStatus = function() {
         return {status: 2, msg: 'Ready'};
     };
-    ext.SettingTargetIP = function(ip) {
-        console.log("SettingTargetIP");
+    ext.Setting_targetIP = function(ip) {
+        console.log("Setting_targetIP");
         return ip;
     }
     port=":8080";
