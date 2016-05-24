@@ -3,7 +3,7 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+@import url(http://fonts.googleapis.com/earlyaccess/cwtexhei.css);
 body,
 html {
     width: 100%;
@@ -17,12 +17,17 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: "cwTeXHei","Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
 
+.logo{
+    width: 112px;
+    height: 21px;
+}
 .topnav {
-    font-size: 14px; 
+    font-size: 14px;
+
 }
 
 .lead {
@@ -35,7 +40,7 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    background: url(../img/one_piece_bg2.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -116,7 +121,7 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
+    background: url(../img/one_piece_bg3.jpeg) no-repeat center center;
     background-size: cover;
 }
 
