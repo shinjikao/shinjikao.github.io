@@ -82,7 +82,25 @@
             }
         });
     };
-
+	ext.Wheel_lights = function (ip, p1,p2,p3,p4,callback) {
+        console.log("Wheel_lights");
+        console.log(ip);
+        console.log(p1);
+		console.log(p2);
+		console.log(p3);
+		console.log(p4);
+        $.ajax({
+            url: 'http://' + ip + port + '/?name=Wheel_lights' + '&p1=' + p1 + '&p2=' + p2 + '&p3=' + p3 + '&p4=' + p4,
+            dataType: 'jsonp',
+            crossDomain: true,
+            success: function (data) {
+                console.log("success handler");
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error handler");
+            }
+        });
+    };
 
     ext.TTS = function (ip, p1, callback) {
         console.log("Tts");
