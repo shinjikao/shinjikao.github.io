@@ -1,0 +1,335 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TweenTime: Advanced example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../dist/styles/editor.css">
+    <link rel="stylesheet" href="../src/fonts/icomoon/style.css">
+    <style>
+      body {
+        background: #efefef;
+      }
+      .thumb {
+        position: relative;
+        width: 220px;
+        margin: 50px auto;
+        padding: 5px 0;
+
+        font-family: 'Source Sans Pro', Helvetica, sans-serif;
+        color: #555;
+        perspective: 600px;
+        -webkit-perspective: 600px;
+        -moz-perspective: 600px;
+      }
+      .thumb__top {
+        padding: 5px;
+        background: #fff;
+      }
+      .thumb__image {
+        position: relative;
+        overflow: hidden;
+        z-index: 10;
+      }
+      .thumb__zoom {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        margin-left: -15px;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeAQAAAAATS5MPAAAAAnRSTlMAAHaTzTgAAAAYSURBVHgBY2Cw/8BAGvH///8/JBGk2wEAjck/Z0GN9oEAAAAASUVORK5CYII=');
+        transform: translate(0, 60px);
+        opacity: 0;
+        z-index: 900;
+      }
+      .thumb__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(196, 170, 151, 0.5);
+        opacity: 0;
+        z-index: 800;
+      }
+      .thumb__caption {
+        padding: 5px 10px 10px 10px;
+        font-size: 12px;
+        background: #fff;
+        transform-origin: 50% 0;
+        -moz-transform-origin: 50% 0;
+        backface-visibility: hidden;
+        transform: rotateX(-100deg);
+        -webkit-font-smoothing: antialiased;
+      }
+      .thumb__title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+      .thumb img {
+        display: block;
+        max-width: 100%;
+      }
+      .thumb a {
+        color: #777 !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <div id="instructions">
+        <video id="my_video_1" class="video-js vjs-default-skin" width="800px" height="600px" preload="none" poster='http://camendesign.com/code/video_for_everybody/test.html' data-setup='{ "aspectRatio":"4:3", "playbackRates": [1, 1.5, 2] }'>
+            <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type='video/mp4' />
+        </video>
+    </div>
+    </div>
+
+    <!-- TweenTime dependencies -->
+    <script src="../src/scripts/bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+    <script src="../src/scripts/bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
+    <script src="../src/scripts/bower_components/js-signals/dist/signals.js"></script>
+
+    <!-- Editor dependencies -->
+    <script src="../src/scripts/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/scripts/bower_components/spectrum/spectrum.js"></script>
+    <script src="../src/scripts/bower_components/d3/d3.js"></script>
+    <script src="../src/scripts/bower_components/lodash/lodash.js"></script>
+    <script src="../src/scripts/bower_components/draggable-number.js/dist/draggable-number.js"></script>
+    <script src="../src/scripts/bower_components/file-saver/FileSaver.js"></script>
+
+    <!-- TweenTime & Editor -->
+    <script src="../dist/scripts/TweenTime.Core.min.js"></script>
+    <script src="../dist/scripts/TweenTime.Editor.min.js"></script>
+
+    <!-- Example script -->
+    <script>
+    var data = [
+      {
+        "id": "Motion",
+        //"type": "Motion",
+        "label": "Motion",
+        //"start": 0,
+        //"end": 30,
+        "properties": [
+          {
+            //"group": "MoveHead",
+            "name": "MoveHead",
+            "val": 5,
+            "keys": [
+              {
+                "time": 0,
+                "val": 0
+              },
+              {
+                "time": 2,
+                "val": 100,
+              }
+            ]
+          },
+          {
+            //"group": "MoveBody",
+            "name": "MoveBody",
+            "val": 10,
+            "keys": [
+              {
+                "time": 0,
+                "val": 0,
+              },
+              {
+                "time": 0.93,
+                "val": 50,
+              }
+            ]
+          }
+        ], //Properties
+        "values": {
+          "X": 100,
+          "Y": 0
+          /*"width": 100,
+          "height": 100,
+          "backgroundColor": "rgb(235, 81, 22)",
+          "opacity": 0.005198327185895191*/
+        }
+      },
+      {
+        "id": "Led",
+        //"type": "Led",
+        "label": "Led",
+        //"start": 0,
+        //"end": 20,
+        "properties": [
+          {
+            //"group": "MoveBody",
+            "name": "Led",
+            "val": 5,
+            "keys": [
+              {
+                "time": 0,
+                "val": 0
+              },
+              {
+                "time": 2,
+                "val": 100,
+                "ease": "Quart.easeInOut"
+              }
+            ]
+          }
+        ], //Properties
+        "values": {
+          "X": 100,
+          "Y": 0,
+         /*"width": 100,
+          "height": 100,
+          "backgroundColor": "rgb(235, 81, 22)",
+          "opacity": 0.005198327185895191*/
+        }
+      },
+      {
+        "id": "Media",
+        //"type": "Led",
+        "label": "Media",
+        "properties": [
+          {
+            //"group": "MoveBody",
+            "name": "Video",
+            "val": 5,
+            "start": 0,
+            "end": 1,
+            "keys": [
+              {
+                "time": 0,
+                "val": 0
+              },
+              {
+                "time": 2,
+                "val": 100,
+              }
+            ]
+          },
+          {
+            //"group": "MoveBody",
+            "name": "Audio",
+            "val": 20,
+            "keys": [
+              {
+                "time": 0,
+                "val": 0
+              },
+              {
+                "time": 2,
+                "val": 100,
+              }
+            ]
+          }
+        ], //Properties
+        "values": {
+          "X": 100,
+          "Y": 0,
+         /*"width": 100,
+          "height": 100,
+          "backgroundColor": "rgb(235, 81, 22)",
+          "opacity": 0.005198327185895191*/
+        }
+      }
+    ];
+
+    /*var data = [
+                {
+                    //
+                    "id": "motion",
+                    "label": "Motion",
+                    "properties": [
+                    {
+                        "name": "moveBody",
+                        "keys": [
+                        {
+                            "time": 0,
+                            "val": 1
+                        },
+                        {
+                            "time": 2.718,
+                            "val": 1.5
+                        }
+                      ],
+                        "val": 1
+                    },
+                    {
+                        "name": "moveHead",
+                        "keys": [
+                        {
+                            "time": 0,
+                            "val": 1
+                        },
+                        {
+                            "time": 2.718,
+                            "val": 1.5
+                        }
+                      ],
+                        "val": 1
+                    }
+                  ],
+                    "values": {
+                        "x": 5
+                    }
+                },
+                {
+                    //
+                    "id": "DS",
+                    "label": "Led",
+                    "properties": [
+                    {
+                        "name": "blink",
+                        "keys": [
+                        {
+                            "time": 0,
+                            "val": 1
+                        },
+                        {
+                            "time": 2.718,
+                            "val": 1.5,
+                            "ease": "Cubic.easeInOut"
+                        }
+                      ],
+                        "val": 1
+                    }
+                  ],
+                    "values": {
+                        "scale": 1.1741241094283317
+                    }
+                }
+              ];*/
+
+      var tweenTime = new TweenTime.Core(data, {
+        totalDuration: 46000 // in milliseconds
+      });
+      //Semon
+      tweenTime.timer.seeked.add(function (time) {
+          console.log(time);
+          var video = $("#my_video_1")[0];
+          video.currentTime = time / 1000;
+      });
+
+      var editor = new TweenTime.Editor(tweenTime, {
+        domainStart: 0,
+        domainEnd: 4000
+      });
+
+      //Semon
+      $(".control--play-pause").click(function () {
+          var video = $("#my_video_1")[0];
+          if (video.paused) {
+              video.play();
+          } else {
+              video.pause();
+          }
+      });
+
+      $("#my_video_1")[0].load();
+    </script>
+  </body>
+</html>
