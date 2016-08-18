@@ -1,7 +1,76 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<meta charset="utf-8">
+	<title>Firebase Scheduler</title>
+	<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/darkly/bootstrap.min.css"/>
+	<link href="mycss.css" rel="stylesheet">
+	<style>
+		
+
+	</style>
+
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<div class="navbar navbar-default narbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+          <a href="../" class="navbar-brand">PlayerssPairSystem</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>    
+        </div>
+
+
+        <div class="navbar-collapse collapse" id="navbar-main">
+	          <ul class="nav navbar-nav">
+	            <li class="dropdown">
+	              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">下載 <span class="caret"></span></a>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Android版</a></li>                 
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">iOS版</a></li>  
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Windows桌面版</a></li>  	
+	                 <li><a href="https://www.spotify.com/tw/" target="_blank">Mac桌面版</a></li>  	
+	              </ul>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                       
+	              </ul>
+	              <ul class="dropdown-menu" aria-labelledby="themes">
+	                   
+	              </ul>
+	            </li>
+	            
+	          </ul>
+
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="http://shinjikao.github.io/Firebase/Spotify.html" target="_blank">註冊</a></li>
+	          </ul>
+	 </div>
+	</div>
+
+</div>	
+
+	<div class="container">
+
+		<input type="text" id="token" class="form-control" placeholder='Spotify Token'>
+
+		<a href="#" id='GetArtist' class="btn btn-default">GetArtist</a>
+		<br/>
+		
+
+		<div id='test' class="row">
+
+		</div>
+		
+		
+	</div>
+	<script>
+
+    </script>
 </body>
 </html>

@@ -1,0 +1,445 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alice_StoryEditor</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../dist/styles/editor.css">
+    <!--<link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>-->
+    <link rel="stylesheet" href="../src/fonts/icomoon/style.css">
+    <style>
+      body {
+        background: #efefef;
+      }
+      .box {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin-left: 50px;
+        margin-top: 50px;
+        background: #33b5e5;
+        color: #fff;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: Helvetica, sans-serif;
+        line-height: 100px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <div class="box">1</div>
+    </div>
+
+    <!-- TweenTime dependencies -->
+    <script src="../src/scripts/bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+    <script src="../src/scripts/bower_components/gsap/src/uncompressed/TimelineMax.js"></script>
+    <script src="../src/scripts/bower_components/js-signals/dist/signals.js"></script>
+
+    <!-- Editor dependencies -->
+    <script src="../src/scripts/bower_components/jquery/dist/jquery.js"></script>
+    <script src="../src/scripts/bower_components/spectrum/spectrum.js"></script>
+    <script src="../src/scripts/bower_components/d3/d3.js"></script>
+    <script src="../src/scripts/bower_components/lodash/lodash.js"></script>
+    <script src="../src/scripts/bower_components/draggable-number.js/dist/draggable-number.js"></script>
+    <script src="../src/scripts/bower_components/file-saver/FileSaver.js"></script>
+
+    <!-- TweenTime & Editor -->
+    <script src="../dist/scripts/TweenTime.Core.min.js"></script>
+    <script src="../dist/scripts/TweenTime.Editor.min.js"></script>
+
+    <!-- Example script -->
+    <script>
+    var data = [
+      {
+        "id": "Motion",
+        "label": "Motion",
+        "title": "Motion Setting",
+        "values": {
+          "X": 70,
+          "Y": 80
+        },
+        "properties": [
+          {
+            "group": "MoveBody",
+            "name": "X",
+            "val": 10,
+            "keys": [
+              /*{
+                "time": 20,
+                "val": 30,
+              },*/
+              {
+                "val_Data":
+                [
+                  {
+                    "val_name": "X",
+                    "val_htmlType":"textbox",
+                    "val_type":"int",
+                    "val_val":50,
+                    "val_unit": "seconds",
+                    "val_interTime": 10,
+                  },
+                  {
+                    "val_name": "Y",
+                    "val_htmlType":"textbox",
+                    "val_type":"int",
+                    "val_val":45,
+                    "val_unit": "seconds",
+                    "val_interTime": 20,
+                  },
+                  {
+                    "val_name": "Move",
+                    "val_htmlType":"select",
+                    "val_type":"string",
+                    "val_val":"Rotate",
+                    "val_unit": "",
+                    "val_interTime": "30",
+                  }
+                ]
+              },
+            ]
+          }/*,
+          {
+            "group": "MoveBody",
+            "name": "Y",
+            "val": 20,
+            "keys": [
+              {
+                "time": 60,
+                "val": 70,
+              },
+              {
+                "time": 80,
+                "val": 90,
+              }
+            ]
+          }*/
+        ], //Properties
+
+      }
+    ]; //data
+
+
+      /*var data = [
+        {
+          "id": "box",
+          "type": "box",
+          "label": "Box 1",
+          "start": 0,
+          "end": 4,
+          "properties": [
+            {
+              "name": "x",
+              "group": "position",
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0
+                },
+                {
+                  "time": 2,
+                  "val": 100,
+                  "ease": "Quart.easeInOut"
+                }
+              ],
+              "val": 0
+            },
+            {
+              "name": "y",
+              "group": "position",
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0,
+                  "ease": "Quad.easeOut"
+                },
+                {
+                  "time": 0.9870000000000003,
+                  "val": 50,
+                  "ease": "Cubic.easeInOut"
+                },
+                {
+                  "time": 2.006,
+                  "val": 0,
+                  "ease": "Quad.easeInOut"
+                }
+              ],
+              "val": 0
+            },
+            {
+              "name": "width",
+              "group": "dimensions",
+              "keys": [],
+              "val": 100
+            },
+            {
+              "name": "height",
+              "group": "dimensions",
+              "keys": [],
+              "val": 100
+            },
+            {
+              "name": "backgroundColor",
+              "type": "color",
+              "group": "colors",
+              "keys": [
+                {
+                  "time": 0,
+                  "val": "rgb(51, 181, 229)"
+                },
+                {
+                  "time": 4,
+                  "val": "rgb(255, 70, 0)",
+                  "ease": "Quad.easeIn"
+                }
+              ],
+              "val": "#33b5e5"
+            },
+            {
+              "name": "color",
+              "type": "color",
+              "group": "colors",
+              "keys": [],
+              "val": undefined
+            },
+            {
+              "name": "opacity",
+              "group": "effects",
+              "keys": [
+                {
+                  "time": 1.214,
+                  "val": 1,
+                  "ease": "Quad.easeOut"
+                },
+                {
+                  "time": 4,
+                  "val": 0,
+                  "ease": "Quad.easeOut"
+                }
+              ],
+              "val": 1,
+              "min": 0,
+              "max": 1
+            }
+          ], //Properties
+          "values": {
+            "x": 100,
+            "y": 0,
+            "width": 100,
+            "height": 100,
+            "backgroundColor": "rgb(235, 81, 22)",
+            "opacity": 0.005198327185895191
+          }
+        }
+      ];*/
+
+      //Alice's Code
+      /*var data = [
+        {
+          "id": "Motion",
+          //"type": "Motion",
+          "label": "Motion",
+          "title": "Motion Setting",
+          //"start": 0,
+          //"end": 30,
+          "properties": [
+            {
+              "group": "MoveHead",
+              "name": "MoveHead",
+              "val": 5,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0
+                },
+                {
+                  "time": 2,
+                  "val": 100,
+                }
+              ]
+            },
+            {
+              "group": "MoveBody",
+              "name": "Key at",
+              "val": 1111.00,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0,
+                },
+                {
+                  "time": 0.93,
+                  "val": 50,
+                }
+              ]
+            },
+            {
+              "group": "MoveBody",
+              "name": "Move",
+              "val": 0,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0,
+                },
+                {
+                  "time": 0.93,
+                  "val": 50,
+                }
+              ]
+            },
+            {
+              "group": "MoveBody",
+              "name": "X",
+              "val": 10,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0,
+                },
+                {
+                  "time": 0.93,
+                  "val": 50,
+                }
+              ]
+            },
+            {
+              "group": "MoveBody",
+              "name": "Y",
+              "val": 20,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0,
+                },
+                {
+                  "time": 0.93,
+                  "val": 50,
+                }
+              ]
+            }
+          ], //Properties
+          "values": {
+            "X": 100,
+            "Y": 0
+            "width": 100,
+            "height": 100,
+            "backgroundColor": "rgb(235, 81, 22)",
+            "opacity": 0.005198327185895191
+          }
+        },
+        {
+          "id": "Led",
+          "title": "Led Setting",
+          //"type": "Led",
+          "label": "Led",
+
+          //"start": 0,
+          //"end": 20,
+          "properties": [
+            {
+              //"group": "MoveBody",
+              "name": "Led",
+              "val": 5,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0
+                },
+                {
+                  "time": 2,
+                  "val": 100,
+                  "ease": "Quart.easeInOut"
+                }
+              ]
+            }
+          ], //Properties
+          "values": {
+            "X": 100,
+            "Y": 0,
+           "width": 100,
+            "height": 100,
+            "backgroundColor": "rgb(235, 81, 22)",
+            "opacity": 0.005198327185895191
+          }
+        },
+        {
+          "id": "Media",
+          //"type": "Led",
+          "title": "Media Setting",
+          "label": "Media",
+          "start": 0,
+          "end": 20,
+          "properties": [
+            {
+              //"group": "MoveBody",
+              "name": "Video",
+              "val": 5,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0
+                },
+                {
+                  "time": 2,
+                  "val": 100,
+                }
+              ]
+            },
+            {
+              //"group": "MoveBody",
+              "name": "Audio",
+              "val": 20,
+              "keys": [
+                {
+                  "time": 0,
+                  "val": 0
+                },
+                {
+                  "time": 2,
+                  "val": 100,
+                }
+              ]
+            }
+          ], //Properties
+          "values": {
+            "X": 100,
+            "Y": 0,
+           "width": 100,
+            "height": 100,
+            "backgroundColor": "rgb(235, 81, 22)",
+            "opacity": 0.005198327185895191
+          }
+        }
+      ];*/
+
+
+
+      var tweenTime = new TweenTime.Core(data);
+      var editor = new TweenTime.Editor(tweenTime);
+
+      var box_values = tweenTime.getValues('box');
+
+      function animate() {
+        var css = {
+          'opacity': box_values.opacity,
+          'background-color': box_values.backgroundColor,
+          'width': box_values.width + "px",
+          'height': box_values.height + "px",
+          'transform': 'translate(' + box_values.x + 'px, ' + box_values.y + 'px)'
+        };
+        if (box_values.color != undefined) {
+          css.color = box_values.color;
+        }
+        $('.box').css(css);
+        window.requestAnimationFrame(animate);
+      }
+
+      //animate();
+    </script>
+  </body>
+</html>
