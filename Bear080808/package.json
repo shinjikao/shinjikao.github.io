@@ -7,7 +7,7 @@
     "d3": "^3.5.2",
     "draggable-number.js": "^0.4.4",
     "gsap": "^1.18.0",
-    "jquery": "^2.1.1",
+    "jquery": "^3.5.0",
     "lodash": "^3.8.0",
     "signals": "^1.0.0",
     "spectrum-colorpicker": "^1.5.2"
